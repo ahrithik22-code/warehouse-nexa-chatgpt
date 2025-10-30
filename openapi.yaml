@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Warehouse Planner API
+  version: 0.1.0
+paths:
+  /auth/login/:
+    post:
+      summary: Obtain auth token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token issued
+  /inventory/products/:
+    get:
+      summary: List products
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create product
+      responses:
+        '201':
+          description: Created
+  /inventory/batches/:
+    get:
+      summary: List batches
+      responses:
+        '200':
+          description: OK
+  /inventory/movements/{id}/commit/:
+    post:
+      summary: Commit a movement
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Movement committed
+  /planner/reorder/:
+    get:
+      summary: China reorder planner results
+      responses:
+        '200':
+          description: OK
+  /planner/fba/:
+    get:
+      summary: FBA planner results
+      responses:
+        '200':
+          description: OK
+  /planner/excess/:
+    get:
+      summary: Excess inventory results
+      responses:
+        '200':
+          description: OK
+  /planner/flags/:
+    get:
+      summary: Planner flags
+      responses:
+        '200':
+          description: OK
+  /imports/receiving/:
+    post:
+      summary: Import receiving data
+      responses:
+        '201':
+          description: Imported
+  /imports/sellerboard/:
+    post:
+      summary: Import Sellerboard metrics
+      responses:
+        '200':
+          description: Imported
+  /imports/manual-orders/:
+    post:
+      summary: Import manual orders
+      responses:
+        '200':
+          description: Imported
